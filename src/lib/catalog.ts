@@ -20,6 +20,7 @@ export type Perfume = {
     seasons: { spring: number; summer: number; autumn: number; winter: number };
     time: { day: number; night: number };
     community: number;
+    reactions: { loved: number; liked: number; disliked: number };
   };
 };
 
@@ -59,6 +60,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 55, summer: 35, autumn: 82, winter: 95 },
       time: { day: 40, night: 94 },
       community: 93,
+      reactions: { loved: 78, liked: 18, disliked: 4 },
     },
   },
   {
@@ -70,6 +72,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 78, summer: 60, autumn: 70, winter: 88 },
       time: { day: 72, night: 80 },
       community: 89,
+      reactions: { loved: 70, liked: 24, disliked: 6 },
     },
   },
   {
@@ -81,6 +84,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 48, summer: 30, autumn: 76, winter: 92 },
       time: { day: 35, night: 96 },
       community: 91,
+      reactions: { loved: 74, liked: 20, disliked: 6 },
     },
   },
   {
@@ -92,6 +96,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 90, summer: 50, autumn: 78, winter: 60 },
       time: { day: 85, night: 70 },
       community: 94,
+      reactions: { loved: 82, liked: 14, disliked: 4 },
     },
   },
   {
@@ -103,6 +108,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 88, summer: 92, autumn: 55, winter: 40 },
       time: { day: 95, night: 50 },
       community: 87,
+      reactions: { loved: 64, liked: 28, disliked: 8 },
     },
   },
   {
@@ -114,6 +120,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 45, summer: 38, autumn: 80, winter: 96 },
       time: { day: 42, night: 97 },
       community: 95,
+      reactions: { loved: 84, liked: 13, disliked: 3 },
     },
   },
   {
@@ -125,6 +132,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 92, summer: 65, autumn: 72, winter: 55 },
       time: { day: 80, night: 74 },
       community: 88,
+      reactions: { loved: 66, liked: 26, disliked: 8 },
     },
   },
   {
@@ -136,6 +144,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 60, summer: 45, autumn: 85, winter: 90 },
       time: { day: 55, night: 89 },
       community: 90,
+      reactions: { loved: 72, liked: 22, disliked: 6 },
     },
   },
   {
@@ -147,6 +156,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 95, summer: 70, autumn: 60, winter: 48 },
       time: { day: 88, night: 66 },
       community: 92,
+      reactions: { loved: 76, liked: 19, disliked: 5 },
     },
   },
   {
@@ -158,6 +168,7 @@ export const PERFUMES: Perfume[] = [
       seasons: { spring: 40, summer: 32, autumn: 78, winter: 94 },
       time: { day: 38, night: 93 },
       community: 89,
+      reactions: { loved: 68, liked: 24, disliked: 8 },
     },
   },
 ];

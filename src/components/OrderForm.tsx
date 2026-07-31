@@ -14,6 +14,8 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
   const [phone, setPhone] = useState("");
   const [wilayaCode, setWilayaCode] = useState("");
   const [commune, setCommune] = useState("");
+  const [manualCommune, setManualCommune] = useState("");
+  const [useManualCommune, setUseManualCommune] = useState(false);
   const [deliveryType, setDeliveryType] = useState<"home" | "office">("home");
   const [quantity, setQuantity] = useState(1);
   const [submitting, setSubmitting] = useState(false);
@@ -38,7 +40,8 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!fullName || !phone || !wilayaCode || !commune) return;
+    const effectiveCommune = useManualCommune ? manualCommune.trim() : commune;
+    if (!fullName || !phone || !wilayaCode || !effectiveCommune) return;
 
     setSubmitting(true);
     const order = {
@@ -47,7 +50,7 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
       fullName,
       phone,
       wilaya: selectedWilaya ? (lang === "ar" ? selectedWilaya.nameAr : selectedWilaya.nameEn) : wilayaCode,
-      commune,
+      commune: effectiveCommune,
       deliveryType: deliveryType === "home" ? t("order.deliveryHome") : t("order.deliveryOffice"),
       quantity,
       unitPrice,
@@ -64,6 +67,8 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
       setPhone("");
       setWilayaCode("");
       setCommune("");
+      setManualCommune("");
+      setUseManualCommune(false);
       setQuantity(1);
     }
   }
@@ -77,7 +82,7 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
   return (
     <div className="space-y-8">
       {/* ─── Form Fields ─── */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form id="order-form" onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label className={labelClass} htmlFor="fullName">
             {t("order.fullName")}
@@ -120,6 +125,8 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
             onChange={(e) => {
               setWilayaCode(e.target.value);
               setCommune("");
+              setManualCommune("");
+              setUseManualCommune(false);
             }}
             className={selectClass}
           >
@@ -140,11 +147,11 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
           </label>
           <select
             id="commune"
-            required
+            required={!useManualCommune}
             value={commune}
             onChange={(e) => setCommune(e.target.value)}
-            disabled={!wilayaCode}
-            className={cn(selectClass, !wilayaCode && "opacity-50")}
+            disabled={!wilayaCode || useManualCommune}
+            className={cn(selectClass, (!wilayaCode || useManualCommune) && "opacity-50")}
           >
             <option value="" disabled>
               {t("order.communePlaceholder")}
@@ -155,6 +162,23 @@ export function OrderForm({ offer }: { offer: AdminOffer }) {
               </option>
             ))}
           </select>
+          <button
+            type="button"
+            onClick={() => setUseManualCommune((v) => !v)}
+            className="mt-1.5 text-xs font-normal tracking-[0.04em] text-primary transition-colors hover:text-primary/70"
+          >
+            {t("order.communeNotFound")}
+          </button>
+          {useManualCommune && (
+            <input
+              type="text"
+              required
+              value={manualCommune}
+              onChange={(e) => setManualCommune(e.target.value)}
+              placeholder={t("order.communeNotFound")}
+              className={cn(selectClass, "mt-2")}
+            />
+          )}
         </div>
 
         <div>

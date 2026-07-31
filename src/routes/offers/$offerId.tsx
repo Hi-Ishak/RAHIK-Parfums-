@@ -60,6 +60,11 @@ function OfferDetailsContent({
   const price = effectivePrice(offer);
   const oldP = oldPrice(offer);
 
+  function scrollToOrderForm() {
+    const el = document.getElementById("order-form-section");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <SiteLayout>
       <section className="mx-auto max-w-3xl px-6 pt-10 pb-6 sm:pt-16">
@@ -122,13 +127,13 @@ function OfferDetailsContent({
         <h2 className="mb-8 text-center text-base font-bold tracking-[0.14em] text-muted-foreground">
           {t("offerDetails.perfumes")}
         </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-7">
+        <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-4">
           {offer.perfumes.map((perfume, i) => (
             <article
               key={i}
-              className="group overflow-hidden rounded-2xl border border-primary/20 bg-card shadow-[0_2px_24px_-18px_oklch(0.145_0_0/0.5)] transition-all duration-500 hover:border-primary/50 hover:shadow-[0_10px_40px_-26px_oklch(0.145_0_0/0.6)]"
+              className="group overflow-hidden rounded-xl border border-primary/20 bg-card shadow-[0_2px_18px_-18px_oklch(0.145_0_0/0.5)] transition-all duration-500 hover:border-primary/40"
             >
-              <div className="aspect-[3/4] overflow-hidden bg-muted">
+              <div className="aspect-square overflow-hidden bg-muted">
                 <img
                   src={perfume.image}
                   alt={localize(perfume.name)}
@@ -137,12 +142,12 @@ function OfferDetailsContent({
                   decoding="async"
                 />
               </div>
-              <div className="px-5 pb-6 pt-5 text-center">
-                <h3 className="text-lg font-bold tracking-[0.08em] text-card-foreground">
+              <div className="px-2 py-2.5 text-center sm:px-3 sm:py-3">
+                <h3 className="truncate text-xs font-bold tracking-[0.04em] text-card-foreground sm:text-sm">
                   {localize(perfume.name)}
                 </h3>
-                <span className="mx-auto mt-3 block h-px w-8 bg-primary/40" aria-hidden="true" />
-                <p className="mt-3 text-sm font-normal leading-relaxed text-muted-foreground">
+                <span className="mx-auto mt-1.5 block h-px w-6 bg-primary/40" aria-hidden="true" />
+                <p className="mt-1.5 hidden text-xs font-normal leading-relaxed text-muted-foreground sm:line-clamp-2">
                   {localize(perfume.description)}
                 </p>
               </div>
@@ -152,12 +157,21 @@ function OfferDetailsContent({
       </section>
 
       {/* ─── Order Form (Phase 4) ─── */}
-      <section className="mx-auto max-w-2xl px-6 pb-24 sm:pb-32">
+      <section id="order-form-section" className="mx-auto max-w-2xl scroll-mt-20 px-6 pb-28 sm:pb-32">
         <h2 className="mb-8 text-center text-base font-bold tracking-[0.14em] text-muted-foreground">
           {t("offerDetails.orderForm")}
         </h2>
         <OrderForm offer={offer} />
       </section>
+
+      <button
+        type="button"
+        onClick={scrollToOrderForm}
+        className="fixed bottom-5 left-1/2 z-40 -translate-x-1/2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold tracking-[0.14em] text-primary-foreground shadow-[0_12px_36px_-12px_oklch(0.145_0_0/0.55)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_16px_44px_-12px_oklch(0.145_0_0/0.6)] active:scale-95 sm:bottom-7"
+        aria-label={t("order.submitNow")}
+      >
+        {t("order.submitNow")}
+      </button>
     </SiteLayout>
   );
 }

@@ -29,6 +29,7 @@ function emptyProduct(): Perfume {
       seasons: { spring: 50, summer: 50, autumn: 50, winter: 50 },
       time: { day: 50, night: 50 },
       community: 50,
+      reactions: { loved: 50, liked: 50, disliked: 50 },
     },
   };
 }

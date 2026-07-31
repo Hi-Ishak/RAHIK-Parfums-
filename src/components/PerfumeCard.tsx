@@ -3,7 +3,7 @@ import type { Perfume } from "@/lib/catalog";
 import { useLocalized } from "@/lib/use-localized";
 import { useI18n } from "@/lib/i18n";
 import { PerfumeBadges } from "@/components/PerfumeBadges";
-import { RatingGroup } from "@/components/RatingBar";
+import { CommunityEvaluation } from "@/components/CommunityEvaluation";
 
 /**
  * A discovery-only perfume card: image, name, availability badges, and the
@@ -40,32 +40,7 @@ export function PerfumeCard({ perfume }: { perfume: Perfume }) {
         <span className="mx-auto mt-6 block h-px w-10 bg-primary/50" aria-hidden="true" />
 
         <div className="mt-6">
-          <h3 className="text-sm font-bold tracking-[0.14em] text-muted-foreground">
-            {t("rating.title")}
-          </h3>
-
-          <div className="mt-5 space-y-5 text-start">
-            <RatingGroup
-              title={t("rating.seasons")}
-              entries={[
-                { key: "rating.spring", value: perfume.ratings.seasons.spring },
-                { key: "rating.summer", value: perfume.ratings.seasons.summer },
-                { key: "rating.autumn", value: perfume.ratings.seasons.autumn },
-                { key: "rating.winter", value: perfume.ratings.seasons.winter },
-              ]}
-            />
-            <RatingGroup
-              title={t("rating.time")}
-              entries={[
-                { key: "rating.day", value: perfume.ratings.time.day },
-                { key: "rating.night", value: perfume.ratings.time.night },
-              ]}
-            />
-            <RatingGroup
-              title={t("rating.community")}
-              entries={[{ key: "rating.community", value: perfume.ratings.community }]}
-            />
-          </div>
+          <CommunityEvaluation ratings={perfume.ratings} />
 
           <button
             type="button"

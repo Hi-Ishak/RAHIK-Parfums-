@@ -105,17 +105,22 @@ function defaultDeliveryPricing(): DeliveryPricing {
 }
 
 function defaultOffers(): AdminOffer[] {
-  return OFFERS.map((o) => ({
-    ...o,
-    freeDelivery: false,
-    discount: {
-      enabled: false,
-      oldPrice: o.price,
-      newPrice: Math.round(o.price * 0.7),
-      startDate: "",
-      endDate: "",
-    },
-  }));
+  return OFFERS.map((o) => {
+    const isSampleDiscount = o.id === "signature-trio";
+    return {
+      ...o,
+      freeDelivery: false,
+      discount: {
+        enabled: isSampleDiscount,
+        oldPrice: o.price,
+        newPrice: isSampleDiscount ? Math.round(o.price * 0.75) : Math.round(o.price * 0.7),
+        startDate: isSampleDiscount ? new Date().toISOString() : "",
+        endDate: isSampleDiscount
+          ? new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+          : "",
+      },
+    };
+  });
 }
 
 const DEFAULT_EMAIL: EmailSettings = {
