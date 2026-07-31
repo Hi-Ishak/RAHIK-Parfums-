@@ -114,7 +114,7 @@ const translations: Record<Language, Dict> = {
     "order.wilayaPlaceholder": "اختر الولاية",
     "order.commune": "البلدية",
     "order.communePlaceholder": "اختر الولاية أولاً",
-    "order.communeNotFound": "البلدية غير موجودة؟ أدخلها يدويًا.",
+    "order.communeNotFound": "لم تجد بلديتك؟ اكتبها هنا",
     "order.deliveryType": "نوع التوصيل",
     "order.deliveryHome": "التوصيل إلى المنزل",
     "order.deliveryOffice": "التوصيل إلى المكتب",
